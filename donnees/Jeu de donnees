@@ -1,0 +1,93 @@
+import pandas as pd
+
+# =================================================
+# 1. CHARGER LE JEU DE DONNEES
+# =================================================
+df = pd.read_csv("donnees/USA_price.csv")
+
+# =================================================
+# 2. EXPLORER LES DONNEES
+# =================================================
+
+"""Vérifier le nombre de lignes et de colonnes"""
+print ("Dimension du jeu de données : ", df.shape)
+
+
+"""Afficher toute les colonnes"""
+print("Nom des colonnes :")
+print (df.columns)
+
+
+"""Type de données"""
+print("type des donnees")
+print(df.dtypes)
+
+
+# =================================================
+# 3. verifier valeurs manquantes
+# =================================================
+
+"""Compter les valeurs manquantes dans toute les colonnes"""
+for colonne in df.columns:
+    manquant = df[colonne].isna().sum()                 #isna ->retourne true si valeure manquante et .sum compte les True
+    print ("valeurs manquantes de chaque colonne")
+    print(f"{colonne} : {manquant}")
+
+# =================================================
+# 3. verifier les valeurs aberrantes
+# =================================================
+
+"""Vérifier prix nuls ou négatifs"""
+class DonneeInvalide(ValueError):
+    """Exeception personalisée de ValueError"""
+
+# colonnes à vérifier
+colonnes_a_verifier = [
+    "price", 
+    "bedrooms", 
+    "bathrooms", 
+    "sqft_living", 
+    "sqft_lot", 
+    "floors",
+    "waterfront",
+    "view",
+    "condition",
+    "sqft_above",
+    "sqft_basement",
+    "yr_built",
+    "yr_renovated"
+]
+for colonne in colonnes_a_verifier:
+    try:
+# Vérifictaion que le colonne à tester est dans le csv
+        if colonne not in df.columns:
+            raise DonneeInvalide(f"La colonne {colonne} est introuvables")
+    except DonneeInvalide as e :
+        print(e) 
+# Variables aberrantes du prix
+try:
+    nb_prix_invalides = (df["price"] <= 0).sum()
+    if nb_prix_invalides > 0:
+        raise DonneeInvalide(f"Il y a {nb_prix_invalides} prix invalides")
+    else:
+        print ("Tous les prix sont valides")
+except DonneeInvalide as e :
+        print(e) 
+# Variables aberrantes du nombre de bedrooms, de bathrooms, sqft_living, sqft_lot, floors, sqft_above, sqft_basement
+try:        
+    for colonne in [
+        "bedrooms", 
+        "bathrooms",
+        "sqft_living", 
+        "sqft_lot",
+        "floors",
+        "sqft_above",
+        "sqft_basement",
+    ]:
+            invalide = (df[colonne] < 0).sum()
+            if invalide > 0:
+                raise DonneeInvalide (f"{colonne} : {invalide} valeur(s) abberante(s).")
+    else : 
+        print ("Aucune valeurs aberantes trouvées.")   
+except DonneeInvalide as e :
+    print(e)
