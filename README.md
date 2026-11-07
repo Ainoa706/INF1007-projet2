@@ -53,6 +53,21 @@ En résumé, voici nos principales données :
 
 
 Étape 3 : Séparer les données
+# ===================================================================
+# INSTRUCTIONS
+# ===================================================================
+Ensembles d'entraînement et de test ( train_test_split ) avec une graine
+aléatoire fixée pour que les résultats soient reproductibles. On n'évalue jamais
+un modèle sur les données qui ont servi à l'entraîner.
+
+# ===================================================================
+# EXPLICATIONS
+# ===================================================================
+Nous avons utilisé traint_test_split(), une fonction de la bibliothèque scikit-learn, pour diviser, de façon aléatoire, l’ensemble de nos observations en deux, soit un ensemble d’entrainement et un ensemble de test.
+
+D’une part, notre ensemble d’entraînement constitue 80 % des observations de notre jeu de données. Il permet à notre modèle de comprendre le lien entre le prix des maisons (variable cible) et leurs caractéristiques (bedrooms, bathrooms, sqft_living, sqft_loft, sqft_above, sqft_basement, floors, yr_built, yr_renovated, condition, view, waterfront). D’autre part, notre ensemble de test constitue 20 % des observations de notre jeu de données. Il nous permet de vérifier si notre modèle est en mesure de prédire correctement le prix des maisons en fonction de leurs caractéristiques et ce, à partir de données auxquelles il n’a jamais été exposé durant son entrainement. Ceci est important, car en évaluant notre modèle sur de nouvelles données (différentes de celles de l'ensemble d'entraînement), nous pouvons mieux évaluer sa capacité à faire des prédictions.
+
+De plus, afin de s’assurer d’obtenir la même répartition des données à chaque exécution du programme (rend nos résultats reproductibles), nous avons fixé random_state=42 (paramètre qui contrôle le mélange de données avant leur séparation en ensemble d’entrainement et ensemble de test).  
 
 
 
