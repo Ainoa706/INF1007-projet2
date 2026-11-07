@@ -1,6 +1,7 @@
 # INF1007-projet2
 Entraîner un modèle simple, puis le mettre à la disposition d'un utilisateur grâce à une interface graphique.
 
+VOLET 2 : ENTRAINER UN MODELE SIMPLE 
 Étape 1 : Explorer et nettoyer les données
 # ===================================================================
 # INSTRUCTIONS
