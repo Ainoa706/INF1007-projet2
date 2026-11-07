@@ -26,3 +26,25 @@ Tout d’abord, nous avons développé un programme qui nous a permis de vérifi
 
 La sortie de notre code nous a donc permis de déterminer que notre jeu de données ne comportait aucune valeur manquante. Toutefois, nous avons pu détecter certaines incohérences. Par exemple, nous avons déterminé 49 observations dont le prix de la maison était égal à 0. Ainsi, nous avons décidé de retirer ces observations, car 0 ne représente pas un prix de vente exploitable, surtout que l’objectif de notre application sera de prédire le prix des différentes maisons en fonction de leurs caractéristiques. De plus, notre code nous a permis de repérer 179 observations dont l’année de rénovation précède l’année de construction, ce qui n’est pas logique. Nous avons donc décidé de retirer également ces observations.
 Ensuite, nous avons développé un programme permettant de procéder au nettoyage de notre jeu de données en fonction des incohérences détectées précédemment. Au final, notre jeu de données contient présentement …. observations et … colonnes.
+
+
+
+
+Étape 2 : Définir le problème
+# ===================================================================
+# INSTRUCTIONS
+# ===================================================================
+Variable cible, type de problème (classification ou régression) et métrique
+d'évaluation justifiée (exactitude, F1, RMSE, R², etc.).
+
+# ===================================================================
+# EXPLICATIONS
+# ===================================================================
+Notre projet consiste à entraîner un modèle simple, puis à le mettre à la disposition d'un utilisateur grâce à une interface graphique. Pour cela, nous avons décidé d’utiliser un jeu de données sur les prix des maisons aux USA. Notre objectif est de développer une application permettant de déterminer le prix d’une maison (price) en fonction des caractéristiques choisies par l’utilisateur (bedrooms, bathrooms, sqft_living, sqft_loft, sqft_above, sqft_basement, floors, yr_built, yr_renovated, condition, view, waterfront). Ainsi, notre variable cible est price (prix). Puisque la valeur cible à prédire (price) est numérique, il s’agit d'un problème de régression. En ce qui concerne la métrique d’évaluation, nous utiliserons la racine de l’erreur quadratique moyenne (RMSE), car elle mesure l'ampleur moyenne des erreurs de prédiction dans un modèle de régression. Ainsi, une faible valeur de RMSE indiquerait que notre modèle est assez précis dans ses prédictions.
+
+
+
+
+
+
+
