@@ -42,6 +42,44 @@ d'évaluation justifiée (exactitude, F1, RMSE, R², etc.).
 # ===================================================================
 Notre projet consiste à entraîner un modèle simple, puis à le mettre à la disposition d'un utilisateur grâce à une interface graphique. Pour cela, nous avons décidé d’utiliser un jeu de données sur les prix des maisons aux USA. Notre objectif est de développer une application permettant de déterminer le prix d’une maison (price) en fonction des caractéristiques choisies par l’utilisateur (bedrooms, bathrooms, sqft_living, sqft_loft, sqft_above, sqft_basement, floors, yr_built, yr_renovated, condition, view, waterfront). Ainsi, notre variable cible est price (prix). Puisque la valeur cible à prédire (price) est numérique, il s’agit d'un problème de régression. En ce qui concerne la métrique d’évaluation, nous utiliserons la racine de l’erreur quadratique moyenne (RMSE), car elle mesure l'ampleur moyenne des erreurs de prédiction dans un modèle de régression. Ainsi, une faible valeur de RMSE indiquerait que notre modèle est assez précis dans ses prédictions.
 
+En résumé, voici nos principales données :
+-	Variable cible : price (prix des maisons)
+-	Caractéristiques : bedrooms, bathrooms, sqft_living, sqft_loft, sqft_above, sqft_basement, floors, yr_built, yr_renovated, condition, view, waterfront
+-	Type de problème : régression (on prédit le prix des maisons selon différentes caractéristiques choisies par l’utilisateur de l’application)
+-	Métrique d’évaluation : RMSE
+
+
+
+
+Étape 3 : Établir une référence 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
