@@ -51,7 +51,7 @@ En résumé, voici nos principales données :
 
 
 
-Étape 3 : Établir une référence 
+Étape 3 : Séparer les données
 
 
 
