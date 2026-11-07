@@ -72,6 +72,23 @@ De plus, afin de s’assurer d’obtenir la même répartition des données à c
 
 
 
+Étape 4 : Établir une référence
+# ===================================================================
+# INSTRUCTIONS
+# ===================================================================
+Un modèle trivial (classe majoritaire, moyenne) qui sert de point de
+comparaison : sans lui, impossible de dire si votre score est bon.
+
+# ===================================================================
+# EXPLICATIONS
+# ===================================================================
+Pour évaluer la performance de notre modèle de prédiction (régression linéaire), nous avons programmé un modèle de référence (point de comparaison). Avec la fonction mean() de Pandas, nous avons calculé le prix moyen des maisons de notre ensemble d’entraînement (y_train). De plus, avec la fonction np.full() de NumPy, nous avons créé un tableau contenant une prédiction pour chaque maison de notre ensemble de test (y_test) et ce, sans tenir compte de leurs caractéristiques. À la suite de cela, nous avons utilisé notre propre fonction calculer_rmse() pour calculer la RMSE de notre modèle de référence en comparant les prix prédits aux prix réels des maisons de l’ensemble de test. Ainsi, cette RMSE nous servira de point de comparaison avec notre modèle de régression linéaire (si notre modèle de régression linéaire obtient un RMSE plus faible que celui de notre modèle de référence, cela signifiera qu’il est plus précis).
+
+
+
+
+
+
 
 
 
