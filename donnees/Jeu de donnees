@@ -91,3 +91,28 @@ try:
         print ("Aucune valeurs aberantes trouvées.")   
 except DonneeInvalide as e :
     print(e)
+# Années de rénovation >= années de construction
+try:
+    invalide = ((df["yr_renovated"] > 0 ) & (df["yr_renovated"] <df["yr_built"])).sum()         # & = and en pandas
+    if invalide > 0:
+        raise DonneeInvalide (f"yr_renovated : {invalide} année(s) de rénovation avant la construction")
+    else:
+        print("yr_renovated : toute les valeurs sont valides")
+except DonneeInvalide as e:
+    print (e)
+
+# Valeurs préautorisée pour : les conditions (1 à 5), view (0 à 4) et waterfront(0 ou 1)
+valeurs_permises = {
+    "condition" : [1, 2, 3, 4, 5],
+    "view" : [0, 1, 2, 3, 4],
+    "waterfront" : [0, 1]
+} 
+for colonne, permises in valeurs_permises.items():
+    try:
+        invalide = (~ df[colonne].isin(permises)).sum()                     # ~ = opérateur de négation en pandas : il inverse chaque True en False et inversement.
+        if invalide > 0:
+            raise DonneeInvalide(f"{colonne} : {invalide} valeur(s) hors de {permises}")
+        else :
+            print(f"{colonne} : toutes les valeurs sont valides")
+    except DonneeInvalide as e:
+        print (e)
