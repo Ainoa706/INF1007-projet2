@@ -195,9 +195,11 @@ def nettoyer_donnees(df):
     df_clean = df_clean[df_clean["view"].isin([0, 1, 2, 3, 4])].copy()                                                       # on garde la meme echelle (0, 1, 2, 3, 4) pour view
     df_clean = df_clean[df_clean["waterfront"].isin([0, 1])].copy()                                                          # on garde la meme echelle (0, 1) pour waterfront
 
-    df_clean = df_clean[colonnes_utiles].copy()
-    return df_clean.reset_index(drop=True)
-
+    df_clean = df_clean[colonnes_utiles].copy()                         # Garder seulement les colonnes utiles
+    plus_cheres = df_clean["price"].nlargest(2).index                   # Trouver les 2 maisons les plus chers
+    plus_grandes = df_clean["sqft_living"].nlargest(2).index            # Trouver les 2 maisons avec les plus grandes superficies
+    df_clean = df_clean.drop(plus_cheres.union(plus_grandes))           # Supprimer les observations extremes (graphiques d'exploitations)
+    return df_clean.reset_index(drop=True)                              # Reinitialiser les indices 
 
 
 
@@ -213,7 +215,8 @@ def graphique_prix(df, chemin):
     plt.title("Distribution des prix des maisons")
     plt.xlabel("Prix en $")
     plt.ylabel("Nombre de maisons")
-    plt.savefig("graphiques/graphique_prix.png")
+    plt.savefig(chemin)
+    plt.close()
 
 def graphique_surface_prix(df, chemin):
     plt.figure(figsize=(8, 5))
@@ -221,5 +224,5 @@ def graphique_surface_prix(df, chemin):
     plt.title("Prix selon la surface habitable")
     plt.xlabel("Surface habitable (sqft)")
     plt.ylabel("Prix ($)")
-    plt.savefig("graphiques/graphique_surface_prix.png")
+    plt.savefig(chemin)
     plt.close()
