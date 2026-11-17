@@ -1,0 +1,92 @@
+{
+    "cible": "price",
+    "caracteristiques": [
+        "bedrooms",
+        "bathrooms",
+        "sqft_living",
+        "sqft_lot",
+        "floors",
+        "yr_built",
+        "yr_renovated",
+        "waterfront",
+        "view",
+        "condition",
+        "city"
+    ],
+    "variables_numeriques": [
+        "bedrooms",
+        "bathrooms",
+        "sqft_living",
+        "sqft_lot",
+        "floors",
+        "yr_built",
+        "yr_renovated"
+    ],
+    "variables_categorielles": {
+        "waterfront": [
+            0,
+            1
+        ],
+        "view": [
+            0,
+            1,
+            2,
+            3,
+            4
+        ],
+        "condition": [
+            1,
+            2,
+            3,
+            4,
+            5
+        ],
+        "city": [
+            "Algona",
+            "Auburn",
+            "Beaux Arts Village",
+            "Bellevue",
+            "Black Diamond",
+            "Bothell",
+            "Burien",
+            "Carnation",
+            "Clyde Hill",
+            "Covington",
+            "Des Moines",
+            "Duvall",
+            "Enumclaw",
+            "Fall City",
+            "Federal Way",
+            "Issaquah",
+            "Kenmore",
+            "Kent",
+            "Kirkland",
+            "Lake Forest Park",
+            "Maple Valley",
+            "Medina",
+            "Mercer Island",
+            "Milton",
+            "Newcastle",
+            "Normandy Park",
+            "North Bend",
+            "Pacific",
+            "Preston",
+            "Ravensdale",
+            "Redmond",
+            "Renton",
+            "Sammamish",
+            "SeaTac",
+            "Seattle",
+            "Shoreline",
+            "Skykomish",
+            "Snoqualmie",
+            "Snoqualmie Pass",
+            "Tukwila",
+            "Vashon",
+            "Woodinville",
+            "Yarrow Point"
+        ]
+    },
+    "metrique": "RMSE",
+    "rmse": 198776.08020087835
+}
