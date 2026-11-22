@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 from src.exceptions import DonneeInvalide
+from abc import ABC, abstractmethod
 
 # =================================================
 # 1. NOS COLONNES 
@@ -226,3 +227,77 @@ def graphique_surface_prix(df, chemin):
     plt.ylabel("Prix ($)")
     plt.savefig(chemin)
     plt.close()
+
+# ==========================================
+# 8. PROGRAMMATION ORIENTEE OBJET
+# ==========================================
+
+# CLASSE PARENTE
+
+class Variable(ABC):
+
+    def __init__(self, nom, valeur):
+        self._nom = nom
+        self._valeur = valeur
+
+    @abstractmethod
+    def valider(self):
+        pass
+
+    def __str__(self):
+        return f"{self._nom} : {self._valeur}"
+
+
+# CLASSE ENFANT : VARIABLE NUMERIQUE
+
+class VariableNumerique(Variable):
+
+    def __init__(self, nom, valeur, minimum=0):
+        super().__init__(nom, valeur)
+        self._minimum = minimum
+
+    def valider(self):
+
+        try:
+            valeur = float(self._valeur)
+        except (ValueError, TypeError):
+            raise ValueError(f"{self._nom} doit être numérique")
+
+        if valeur < self._minimum:
+            raise ValueError(f"{self._nom} est invalide")
+
+        return True
+
+
+# CLASSE ENFANT : VARIABLE CATEGORIELLE
+
+class VariableCategorielle(Variable):
+
+    def __init__(self, nom, valeur, categories):
+        super().__init__(nom, valeur)
+        self._categories = categories
+
+    def valider(self):
+
+        if self._valeur not in self._categories:
+            raise ValueError(f"Valeur invalide pour {self._nom}")
+
+        return True
+
+
+# CLASSE MAISON : COMPOSITION
+
+class Maison:
+
+    def __init__(self, variables):
+        self._variables = variables
+
+    def valider(self):
+
+        for variable in self._variables:
+            variable.valider()
+
+        return True
+
+    def __str__(self):
+        return f"Maison contenant {len(self._variables)} caractéristiques"
