@@ -444,8 +444,4 @@ else:
     st.write(
         "Pour arreter le serveur, appuyez sur Ctrl+C dans le terminal."
     )
-<<<<<<< HEAD
-=======
-
->>>>>>> 80ae7b724e2bddc7915ed9e08abe9cbfe777270b
 
