@@ -81,7 +81,11 @@ colonnes_utiles = [
 # 2. CHARGER NOS DONNEES (OS)
 # =================================================
 
-def charger_donnees(chemin):
+def charger_donnees(chemin: str) -> pd.DataFrame: 
+    """
+    Charge les données d'un fichier CSV.
+    Il y a erreur si le fichier est introuvable (FileNotFoundError)
+    """
     if not os.path.exists(chemin):                                #verifie d'abord que le fichier existe
         raise FileNotFoundError("Fichier csv introuvable")        #si fichier existe pas, raise erreur
 
@@ -97,7 +101,7 @@ def charger_donnees(chemin):
 # 3. EXPLORER LES DONNEES/COLONNES DU JEU DE DONNEES
 # ====================================================
 
-def explorer_donnees(df):
+def explorer_donnees(df: pd.DataFrame) -> None: 
 
     """Vérifier le nombre de lignes et de colonnes"""
     print ("Dimension du jeu de données : ", df.shape)
@@ -134,7 +138,13 @@ def explorer_donnees(df):
 # 5. VERIFIER LES VALEURS ABERRANTES (TRY/EXCEPT)/(EXCEPTION PERSONNALISEE)
 # ==========================================================================
 
-def verifier_donnees(df):
+def verifier_donnees(df: pd.DataFrame) -> dict[str, int]: 
+    """
+    Reçoit le DataFrame et vérifie les valeurs invalides.
+    Retourne un dictionnaire avec le nombre d'erreurs pouur chaque colonne.
+    Erreur si une colonne est absente ou contient des types incompatibles.
+    """
+    
     bilan = {}
 
     try:
@@ -181,7 +191,13 @@ def verifier_donnees(df):
 # 6. NETTOYER LES DONNEES (CLEAN)
 # =================================
 
-def nettoyer_donnees(df):
+def nettoyer_donnees(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Reçoit le DataFrame et nettoie les données des maisons selon les regles qu'on a établie.
+    Retourne un DataFrame sans valeurs invalides et aberrantes.
+    Erreur si une colonne est absente.
+    """
+    
     df_clean = df.copy()
 
     df_clean = df_clean.dropna(subset=colonnes_utiles + ["sqft_above", "sqft_basement"]).copy()                              # .dropna() sert a supprimer les valeurs manquantes et subset=colonnes_utiles sert a preciser les colonnes dans lesquelles on veut verifier les valeurs manquantes
@@ -210,7 +226,11 @@ def nettoyer_donnees(df):
 # =================================
 
 """Partie graphique de l'étape 1"""
-def graphique_prix(df, chemin):
+def graphique_prix(df: pd.DataFrame, chemin: str) -> None:
+    """
+    Reçoit le DataFrame clean et un chemin de sauvegarde pour le graphique généré.
+    Crée et enregistre un graphique des prix des maisons.
+    """
     plt.figure(figsize=(8, 5))
     plt.hist(df["price"], bins=50)
     plt.title("Distribution des prix des maisons")
@@ -219,7 +239,11 @@ def graphique_prix(df, chemin):
     plt.savefig(chemin)
     plt.close()
 
-def graphique_surface_prix(df, chemin):
+def graphique_surface_prix(df: pd.DataFrame, chemin: str) -> None:
+    """
+    Reçoit le DataFrame clean et un chemin de sauvegarde pour le graphique généré.
+    Crée et enregistre un graphique du prix des maisons selon la surface habitable.
+    """
     plt.figure(figsize=(8, 5))
     plt.scatter(df["sqft_living"], df["price"], alpha=0.3)
     plt.title("Prix selon la surface habitable")
@@ -227,6 +251,10 @@ def graphique_surface_prix(df, chemin):
     plt.ylabel("Prix ($)")
     plt.savefig(chemin)
     plt.close()
+
+
+
+
 
 # ==========================================
 # 8. PROGRAMMATION ORIENTEE OBJET
