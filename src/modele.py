@@ -31,7 +31,12 @@ caracteristiques_categorielles = [
 caracteristiques_numeriques = [colonne for colonne in caracteristiques if colonne not in caracteristiques_categorielles]
 
 
-def definir_probleme(df):
+def definir_probleme(df: pd.DataFrame) -> tuple[pd.DataFrame, pd.Series]:
+    """
+    Reçoit le DataFrame clean contenant les données des maisons.
+    Retourne les caractéristiques (x) et les prix (y).
+    Erreur si une colonne est absente.
+    """
     x = df[caracteristiques].copy()   # Creer une copie des donnees des caracteristiques (variable x) pour eviter de modifier accidentellement notre ensemble de donnees (df)
     y = df[cible].copy()              # # Creer une copie des donnees des prix (variable y) pour eviter de modifier accidentellement notre ensemble de donnees (df)
     return x, y
@@ -44,7 +49,12 @@ def definir_probleme(df):
 # 9. SÉPARER LES DONNÉES
 # =================================
 
-def separer_donnees(x, y):
+def separer_donnees(x: pd.DataFrame, y: pd.Series) -> tuple:
+    """
+    Reçoit les caractéristiques (x) et les prix (y) des maisons (données clean).
+    Sépare les données en 80 % pour l'entraînement et 20 % pour les tests.
+    Retourne x_train, x_test, y_train et y_test.
+    """
     x_train, x_test, y_train, y_test = train_test_split(
         x,                  # Caracteristiques des maisons
         y,                  # Variale cible : prix des maisons 
@@ -61,7 +71,12 @@ def separer_donnees(x, y):
 # 10. CALCULER LE RMSE
 # =================================
 
-def calculer_rmse(y_reel, y_predit):               # Calculer le rmse entre le prix reel vs le prix predit d'une maison
+def calculer_rmse(y_reel: pd.Series, y_predit: np.ndarray) -> float:  # Calculer le rmse entre le prix reel vs le prix predit d'une maison
+    """
+    Reçoit les prix réels et les prix prédits.
+    Calcule et retourne le RMSE.
+    Erreur si les données sont vides ou de dimensions incompatibles.
+    """              
     reels = np.asarray(y_reel, dtype=float)        # Convertir les donnees reels en tableau numpy
     predits = np.asarray(y_predit, dtype=float)    # Convertir les donnees predits en tableay numpy
 
@@ -82,7 +97,11 @@ def calculer_rmse(y_reel, y_predit):               # Calculer le rmse entre le p
 # 11. MODÈLE DE RÉFÉRENCE
 # =================================
 
-def modele_de_reference(y_train, y_test):                           # Nous sert de point de compraison : est-ce que notre regression lineaire predit mieux les prix que le fait de donner le prix moyen a toutes les maisons 
+def modele_de_reference(y_train: pd.Series, y_test: pd.Series) -> float:    # Nous sert de point de compraison : est-ce que notre regression lineaire predit mieux les prix que le fait de donner le prix moyen a toutes les maisons 
+    """
+    Reçoit les prix d'entraînement et de test.
+    Calcule et retourne le RMSE en utilisant le prix moyen des maisons.
+    """                          
     prix_moyen_entrainement = y_train.mean()                        # Calculer le prix moyen pour les donnees d'entrainement (80%)
     predictions = np.full(len(y_test), prix_moyen_entrainement)     # Predire le prix moyen pour toutes les maisons du test
     rmse = calculer_rmse(y_test, predictions)                       # Calculer le rmse
@@ -96,7 +115,12 @@ def modele_de_reference(y_train, y_test):                           # Nous sert 
 # 12. ENTRAÎNER LA RÉGRESSION LINÉAIRE
 # =======================================
 
-def entrainer_modele(x_train, y_train):
+def entrainer_modele(x_train: pd.DataFrame, y_train: pd.Series) -> Pipeline:
+    """
+    Reçoit les caractéristiques et les prix d'entraînement.
+    Prépare les données (transforme les caractéristiques catégirielles en valeurs numéeriques et entraîne un modèle de régression linéaire.
+    Retourne le modèle entraîné.
+    """
     preparer_donnees = ColumnTransformer(                      # ColumnTransformer : choisit les colonnes à transformer
         transformers = [
             (
@@ -120,8 +144,13 @@ def entrainer_modele(x_train, y_train):
 # 13. ÉVALUER LE MODÈLE DE RÉGRESSION LINÉAIRE
 # ===============================================
 
-def evaluer_modele(modele, x_test, y_test):        # Evaluer la precision de notre modele sur le prix de maisons auxquelles il n'a pas ete exposees (pour voir si le modele marche bien)
-    predictions = modele.predict(x_test)           # Predire le prix des maisons contenues dans l'ensemble de donnees de test (20%)
+def evaluer_modele(modele: Pipeline, x_test: pd.DataFrame, y_test: pd.Series) -> tuple[np.ndarray, float]:  # Evaluer la precision de notre modele sur le prix de maisons auxquelles il n'a pas ete exposees (pour voir si le modele marche bien)
+    """
+    Reçoit le modèle entraîné et les données de test (nouvelles données).
+    Calcule les prédictions (prix de maisons) et le RMSE.
+    Retourne les prix prédits et le RMSE.
+    """       
+    predictions = modele.predict(x_test)           # Predire le prix des maisons contenues dans l'ensemble de donnees de test (20%) ; modele.predict() est une méthode qui génére des prédictions à partir dùn modèle déjà entrainé sur de nouvelles données (scikit-learn)
     rmse = calculer_rmse(y_test, predictions)      # Calculer le RMSE
     return predictions, rmse
 
@@ -133,7 +162,11 @@ def evaluer_modele(modele, x_test, y_test):        # Evaluer la precision de not
 # 14. GRAPHIQUE - PRIX DE MAISONS PRÉDITS VS RÉELS (NUAGE DE POINTS)
 # ====================================================================
 
-def graphique_predictions_reels(y_test, predictions, chemin):
+def graphique_predictions_reels(y_test: pd.Series, predictions: np.ndarray, chemin: str) -> None:
+    """
+    Reçoit les prix réels, les prix prédits et un chemin de sauvegarde.
+    Crée et enregistre un graphique comparant les prix réels et prédits.
+    """
     plt.figure(figsize=(12, 7))
 
     plt.figure(figsize=(12, 7))
@@ -166,7 +199,11 @@ def graphique_predictions_reels(y_test, predictions, chemin):
 # 15. Sauvegarder le modele (joblib et fichier json/métadonnées)
 # ==================================================================
 
-def sauvegarder_modele(modele, x_train, rmse, chemin_modele, chemin_json):
+def sauvegarder_modele(modele: Pipeline, x_train: pd.DataFrame, rmse: float, chemin_modele: str, chemin_json: str) -> None:
+    """
+    Reçoit le modèle entraîné, les données d'entraînement, le RMSE et les chemins de sauvegarde.
+    Enregistre le modèle et ses informations dans des fichiers.
+    """
     jb.dump(modele, chemin_modele)
 
     intervalles = {}
