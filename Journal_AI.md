@@ -1,1 +1,10 @@
+============================================================================================================
+# LE PYTEST
+============================================================================================================
+Au fur et à mesure des différentes modifications de notre code, le GitHub nous indiquait que le pytest échouait systématiquement. Avec l'IA on a pu déterminer quel était le problème et ainsi nous avons ajouté un fichier pytest.ini afin d'indiquer à pytest que la racine du projet fait partie du chemin de recherche des modules. Sans cela, GitHub ne trouvait pas le dossier src et l'erreur No module named 'src' apparaissait, alors que les tests fonctionnaient sur nos ordinateurs. L'IA a aussi remarqué que notre fichier requirements.txt était incomplet (il manquait notamment scikit-learn et joblib), ce qui aurait fait échouer les tests juste après. Nous l'avons complété. Nous avons ensuite vérifié que le fichier était bien nommé et placé à la racine du projet, puis que les tests passaient sur GitHub.
 
+============================================================================================================
+# CREATION DE L'INTERFACE
+============================================================================================================
+On a utilisé l'intelligence artificielle pour créer notre interface et nous indiquer quelles bibliothèques étaient les plus pertinante à utiliser. On à fait des photos de nos maquettes d'interfaces qu'on avait imaginé afin de lui transmettre l'organisation et l'apparence que nous souhaitions obtenir. À partir de ces visuels, l'IA nous a guidés dans la réalisation de l'interface en proposant du code adapté à notre conception.
+L'IA nous a ainsi permis d'accélérer le développement de l'interface, un processus inconnu jusqu'alors. Nous avons toutefois dû comprendre, tester et adapter les propositions générées afin de les intégrer correctement à notre programme et de nous assurer qu'elles répondaient aux besoins du projet.
