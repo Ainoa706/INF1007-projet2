@@ -158,18 +158,20 @@ sauvegardé.
 # ===================================================================
 # EXPLICATIONS
 # ===================================================================
+Pour développer l'interface graphique, nous avons utilisé le bibliothèque Stramlit. Tout le code dédié à l'interface se trouve dans le fichier interface.py dans le dossier src. Pour lancer l'application de prédiction il faut donc d'abord télécharger les bibliothèques qui se trouve dan requirement.txt avec pip install -r requirements.txt et lancer la commande python -m streamlit run src/interface.py dans le terminal.
 
+L'interface charge le modèle déjà entraîné et ses métadonnées (modele.joblib et metdata.json qui se trouvent dans le dossier modele). Le modèle est donc entraîné une seule fois, ce qui lui permet d'être plus rapide au lancement. L'interface charge également le jeu de données nettoyé grâce à la fonction nettoyer_donnees(), car elle s'en sert pour déterminer les valeurs minimales et maximales des champs numériques pour générer les graphiques proposés à l'utilisateur.
+L'interface est divisée en plusieurs pages qui sont dans le menus de navigation à gauche de l'écran qui permet de passer d'une page à l'autre. On y retrouve, l'accueil, l'outil de prédiction, les graphiques d'information, l'historique et quitter.
 
+Les saisies de carctéristiques des maisons pour la prédiction se font dans la page "Outil de prédiction" à l'aide du formulaire st.forme réparti en deux colonnes. Il comporte 11 champs, un par variable d'entrée dont le type est adapté à la nature de la variable:
+- Les champs numériques (st.number_input) : nombre de chambres (bedrooms), nombre de salles de bain (bathrooms), nombre d'étages (floors), superficie habitable (sqft_living), superficie du terrain (sqft_lot), année de construction (yr_built) et année de rénovation (yr_renovated, où 0 signifie qu'aucune rénovation n'a été faite). Chaque champ possède une valeur par défaut, un minimum et maximum calculés à partir des données nettoyées. Ainsi, l'utilisateur ne peut pas entrer une valeur en dehors de la plage de notre jeu de données.
+- Listes déroulantes (st.selectbox) : ville (city), qualité de la vue (view), état de la maison (condition) et présence d'un plan d'eau (waterfront). Les choix proposés sont lus directement dans la section variables_categorielles du fichier metadata.json : ce sont donc exactement les catégories que le modèle a rencontrées pendant son entraînement (43 villes, vue de 0 à 4, état de 1 à 5, plan d'eau 0 ou 1). Pour waterfront, la liste affiche « Oui » ou « Non » au lieu de 1 ou 0, afin que ce soit plus clair pour l'utilisateur.
 
+Le formulaire contient un bouton "Prédire le prix". Les valeurs saisies ne sont envoyé au modèle que lorsque l'utilisateur clique sur ce bouton ce qui évite de relancer une nouvelle prédiction à chaque changement de caractéristique. Au moment où le bouton est cliqué, l'interface vérifie d'abord que l'année de rénovation est bien postérieure à l'année de construction et affiche un message d'erreur si c'est le cas. Sinon, les valeurs sont regroupées dans un dictionnaire transformées en DataFrame pandas, puis les colonnes sont placées dans le même ordre que celui indiqué dans metadata.json, avant d'appeler modele.predict(). Le prix estimé est ensuite affiché, accompagné d'un graphique qui situe l'estimation par rapport à la distribution des prix, et d'une comparaison avec le prix moyen des maisons de la ville choisie. Une prédiction invalide (prix négatif ou nul) ou une erreur du modèle est signalée à l'utilisateur par un message d'erreur plutôt que par un plantage de l'application.
 
+Les autres pages de l'interface présentent :
+- Les graphiques d'informatrion : l'utilisateur à les choix entre plusieurs graphiques : distribution des prix, le nuage de points superficie habitable / prix sur lequel sa dernière estimation apparaît en rouge et la distribution des prix pour une ville donnée.
+- L'historique de recherche : Chaque prédiction est sauvegardée dans le fichier historique.csv dans le dossier donnees, avec la date de l'estimation, les caractéristiques saisies, le prix prédit et l'écart avec le prix moyen dans la ville de la prédiction. La page affiche un tableau de la racherche la plus récente à la plus ancienne et permet de télécharger le fichier.
+- Quitter : Explique comment fermer l'application. Autrement dit, fermet l'onglet et effectuer un Ctrl + C dans le terminal VsCode.
 
-
-
-
-
-
-
-
-
-
-
+Enfin, une mise en garde est affiché à l'utilisateur sur le page d'accueil et de prédiction.
