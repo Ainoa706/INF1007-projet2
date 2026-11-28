@@ -64,11 +64,5 @@ L'IA nous a ainsi permis d'accélérer le développement de l'interface, un proc
 - Vérification faite : On a exécuté notre programme principal et vérifié les résultats affichés dans le terminal à chacune des étapes (ex: dimensions du DataFrame après le nettoyage, le nombre de colonnes et observations supprimées, les dimensions des ensembles d'entraînement/test et les RMSE des 2 modèles). On a aussi vérifié que les graphiques, le modèle entraîné et le fichier de métadonnées étaient générés dans leurs dossiers respectifs
 - Décision — Gardé et modifié : On a conservé la structure générale proposée par l'IA et les fonctionnalités de la bibliothèque os pour gérer les chemins d'accès. Par contre, dans son code, il y avait plusieurs lignes try/except qu'on a supprimé. On voulait gardé un code simple et direct. On a aussi personnalisé toutes les instructions print()
 
-# ===================================================================
-# Documentations utiliées 
-# ===================================================================
-- Pandas : https://pandas.pydata.org/docs/user_guide/index.html 
-- NumPy : https://numpy.org/doc/stable/user/basics.io.html
-- Matplotlib : https://www.datacamp.com/tutorial/matplotlib-tutorial-python?utm_cid=23487274749&utm_aid=192541861336&utm_campaign=230119_1-ps-dscia~dsa-tofu~python_2-b2c_3-nam_4-prc_5-na_6-na_7-le_8-pdsh-go_9-nb-e_10-na_11-na&utm_loc=9000381-&utm_mtd=-c&utm_kw=&utm_source=google&utm_medium=paid_search&utm_content=ps-dscia~nam-en~dsa~tofu~tutorial~python&gad_source=1&gad_campaignid=23487274749&gbraid=0AAAAADQ9WsE4yh497KM0Uzw8JdKVIuFEI&gclid=Cj0KCQiA8aTYBhCvARIsAJFINleFwnx0BkBsqYGdx1CsentFM8JrV-SE_MFixha5xLT166Q_-VTsjqAaAmAMEALw_wcB
-- Scikit : https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html 
+
 
