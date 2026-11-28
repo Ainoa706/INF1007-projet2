@@ -175,3 +175,12 @@ Les autres pages de l'interface présentent :
 - Quitter : Explique comment fermer l'application. Autrement dit, fermet l'onglet et effectuer un Ctrl + C dans le terminal VsCode.
 
 Enfin, une mise en garde est affiché à l'utilisateur sur le page d'accueil et de prédiction.
+
+
+
+
+
+# ===================================================================
+# Lien du jeu de données (USA House Prices)
+# ===================================================================
+USA House Prices (jeu de données) : https://www.kaggle.com/datasets/fratzcan/usa-house-prices?resource=download
