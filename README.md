@@ -184,3 +184,15 @@ Enfin, une mise en garde est affiché à l'utilisateur sur le page d'accueil et 
 # Lien du jeu de données (USA House Prices)
 # ===================================================================
 USA House Prices (jeu de données) : https://www.kaggle.com/datasets/fratzcan/usa-house-prices?resource=download
+
+
+
+
+
+# ===================================================================
+# Documentations utiliées 
+# ===================================================================
+- Pandas : https://pandas.pydata.org/docs/user_guide/index.html 
+- NumPy : https://numpy.org/doc/stable/user/basics.io.html
+- Matplotlib : https://www.datacamp.com/tutorial/matplotlib-tutorial-python?utm_cid=23487274749&utm_aid=192541861336&utm_campaign=230119_1-ps-dscia~dsa-tofu~python_2-b2c_3-nam_4-prc_5-na_6-na_7-le_8-pdsh-go_9-nb-e_10-na_11-na&utm_loc=9000381-&utm_mtd=-c&utm_kw=&utm_source=google&utm_medium=paid_search&utm_content=ps-dscia~nam-en~dsa~tofu~tutorial~python&gad_source=1&gad_campaignid=23487274749&gbraid=0AAAAADQ9WsE4yh497KM0Uzw8JdKVIuFEI&gclid=Cj0KCQiA8aTYBhCvARIsAJFINleFwnx0BkBsqYGdx1CsentFM8JrV-SE_MFixha5xLT166Q_-VTsjqAaAmAMEALw_wcB
+- Scikit : https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.train_test_split.html 
