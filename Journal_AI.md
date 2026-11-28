@@ -6,6 +6,7 @@ Au fur et à mesure des différentes modifications de notre code, le GitHub nous
 ============================================================================================================
 # CREATION DE L'INTERFACE
 ============================================================================================================
+- Outil : ChatGPT
 On a utilisé l'intelligence artificielle pour créer notre interface et nous indiquer quelles bibliothèques étaient les plus pertinante à utiliser. On à fait des photos de nos maquettes d'interfaces qu'on avait imaginé afin de lui transmettre l'organisation et l'apparence que nous souhaitions obtenir. À partir de ces visuels, l'IA nous a guidés dans la réalisation de l'interface en proposant du code adapté à notre conception.
 L'IA nous a ainsi permis d'accélérer le développement de l'interface, un processus inconnu jusqu'alors. Nous avons toutefois dû comprendre, tester et adapter les propositions générées afin de les intégrer correctement à notre programme et de nous assurer qu'elles répondaient aux besoins du projet.
 
@@ -26,3 +27,12 @@ L'IA nous a ainsi permis d'accélérer le développement de l'interface, un proc
 - Réponse reçue : ChatGPT nous a proposé un modèle de référence qui consiste à prédire le prix moyen des maisons de l'ensemble d'entraînement, sans prendre en compte leurs caractéristiques. En gros, l'IA nous a dit d'utiliser la fonction mean() de Pandas pour calculer le prix moyen et la fonction np.full() de NumPy pour obtenir la meme prédiction pour chaque maison. 
 - Vérification faite : On a exécuté le programme et comparé les résultats des deux modèles. Le modèle de référence a obtenu un RMSE de 334 498$ et celui de la régression linéaire a obtenu un RMSE de 198 776$. Le RMSE de notre régression linéaire était donc plus petite que celui du modèle de référence, la régression linéaire fournissait des résultats plus précis.
 - Décision — Gardé : On a gardé l'idée du modèle de référence proposée par l'IA et on a intégré cette proposition dans notre fonction modele_de_reference()
+
+# ===================================================================
+# Suppression des valeurs extrêmes
+# ===================================================================
+- Outil : ChatGPT
+- Ce que nous avons demandé (input) : On a fait un nuage de points sur le prix des maisons en fonction de leur superficie habitable. En analysant notre graphique, on a remarqué que certaines observations étaient particulièrement éloignées. On veut supprimer les maisons (10) les plus chères de notre jeu de données. Voici notre nuage de points et le fichier ZIP de notre projet. On veut modifier notre fonction nettoyer_donnees() pour supprimer ces observations à l'aide de Pandas. On veut aussi conserver le reste de notre code tel quel.
+- Réponse reçue : ChatGPT a proposé d'utiliser la fonction nlargest(10) de Pandas pour identifier les observations avec les prix les plus élevés. Il nous a aussi expliqué comment récupérer leurs indices (index) et supprimer les observations correspondantes avec la fonction drop(). En gros, il nous a montré le code qu'il nous proposait et mis des commentaires dans chacune des lignes pour assurer notre compréhension du code et de son fonctionnement
+- Vérification faite : On a intégré le code (nlargest() et drop()) et on a généré notre graphique. Les observations du nuage de points étaient à présent plus concentrées sur la zone centrale du graphique. 
+- Décision — Modifié : On a conservé les fonctions nlargest() et drop() proposées par l'IA, mais on a modifié notre stratégie initiale. On a décidé de supprimer les 10 maisons les plus chères, mais aussi les 10 maisons avec les plus grandes superficies habitables. 
